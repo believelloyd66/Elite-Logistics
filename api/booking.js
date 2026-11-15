@@ -1,4 +1,4 @@
-import { adminDb } from "../lib/firebaseAdmin.js";
+import { adminDb } from "./firebaseAdmin.js";
 import { randomUUID } from "node:crypto";
 
 export default async function handler(req, res) {

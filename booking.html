@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book A Shipment | Elite Logistics</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .booking-hero {
+            background: #14243E;
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .booking-hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .booking-hero p {
+            color: #c7d0dc;
+        }
+
+        .booking-container {
+            max-width: 850px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .booking-heading {
+            margin-bottom: 30px;
+        }
+
+        .booking-heading h2 {
+            color: #14243E;
+            font-size: 27px;
+            margin-bottom: 8px;
+        }
+
+        .booking-heading p {
+            color: #718096;
+            font-size: 14px;
+        }
+
+        .booking-form {
+            background: white;
+            padding: 35px;
+            border: 1px solid #e5e9ef;
+            border-radius: 6px;
+            box-shadow: 0 8px 30px rgba(20,36,62,0.05);
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h3 {
+            color: #14243E;
+            font-size: 18px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e7ebf0;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 17px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            color: #26364B;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #dce2e9;
+            border-radius: 4px;
+            outline: none;
+            background: #fff;
+            color: #26364B;
+            font-size: 14px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #D99A32;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .booking-submit {
+            width: 100%;
+            padding: 16px;
+            background: #14243E;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .booking-submit:hover {
+            background: #D99A32;
+        }
+
+        .booking-note {
+            color: #718096;
+            font-size: 12px;
+            text-align: center;
+            margin-top: 18px;
+        }
+
+        @media(max-width: 600px) {
+            .booking-hero h1 {
+                font-size: 30px;
+            }
+
+            .booking-form {
+                padding: 22px 16px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <a href="index.html" class="logo">
+        ELITE<span>LOGISTICS</span>
+    </a>
+
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+    <nav class="navigation" id="navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="tracking.html">Track Shipment</a>
+        <a href="booking.html" class="active">Book Delivery</a>
+    </nav>
+
+    <a href="booking.html" class="header-btn">Get Started</a>
+
+</header>
+
+
+<section class="booking-hero">
+
+    <span class="small-heading">SHIP WITH CONFIDENCE</span>
+
+    <h1>Book A Shipment</h1>
+
+    <p>Provide your shipment details to get started.</p>
+
+</section>
+
+
+<main class="booking-container">
+
+    <div class="booking-heading">
+        <h2>Shipment Information</h2>
+        <p>Complete the form below with accurate information.</p>
+    </div>
+
+
+    <form class="booking-form" id="bookingForm">
+
+        <!-- CUSTOMER INFORMATION -->
+
+        <section class="form-section">
+
+            <h3>01. Customer Information</h3>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="customerName">Full Name *</label>
+                    <input
+                        type="text"
+                        id="customerName"
+                        name="customerName"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="Enter phone number"
+                        autocomplete="tel"
+                        required
+                    >
+                </div>
+
+                <div class="form-group full">
+                    <label for="email">Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                    >
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PICKUP DETAILS -->
+
+        <section class="form-section">
+
+            <h3>02. Pickup Details</h3>
+
+            <div class="form-grid">
+
+                <div class="form-group full">
+                    <label for="pickup">Pickup Address *</label>
+                    <textarea
+                        id="pickup"
+                        name="pickupAddress"
+                        placeholder="Enter complete pickup address"
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="pickupCity">Pickup City *</label>
+                    <input
+                        type="text"
+                        id="pickupCity"
+                        name="pickupCity"
+                        placeholder="Pickup city"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="pickupState">Pickup State *</label>
+                    <input
+                        type="text"
+                        id="pickupState"
+                        name="pickupState"
+                        placeholder="Pickup state"
+                        required
+                    >
+                </div>
+
+            </div>
+
+        </section>
+        <!-- DESTINATION DETAILS -->
+
+        <section class="form-section">
+
+            <h3>03. Destination Details</h3>
+
+            <div class="form-grid">
+
+                <div class="form-group full">
+                    <label for="destination">Destination Address *</label>
+                    <textarea
+                        id="destination"
+                        name="destinationAddress"
+                        placeholder="Enter complete destination address"
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="destinationCity">Destination City *</label>
+                    <input
+                        type="text"
+                        id="destinationCity"
+                        name="destinationCity"
+                        placeholder="Destination city"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="destinationState">Destination State *</label>
+                    <input
+                        type="text"
+                        id="destinationState"
+                        name="destinationState"
+                        placeholder="Destination state"
+                        required
+                    >
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PARCEL DETAILS -->
+
+        <section class="form-section">
+
+            <h3>04. Parcel Information</h3>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="service">Shipping Method *</label>
+
+                    <select id="service" name="shippingMethod" required>
+                        <option value="">Select service</option>
+                        <option value="Road Transportation">Road Transportation</option>
+                        <option value="Air Freight">Air Freight</option>
+                        <option value="Sea Freight">Sea Freight</option>
+                        <option value="Warehousing">Warehousing Enquiry</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="parcelType">Parcel Type *</label>
+
+                    <select id="parcelType" name="parcelType" required>
+                        <option value="">Select parcel type</option>
+                        <option value="Documents">Documents</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Clothing">Clothing</option>
+                        <option value="Food Items">Food Items</option>
+                        <option value="Household Goods">Household Goods</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="weight">Estimated Weight</label>
+
+                    <input
+                        type="number"
+                        id="weight"
+                        name="weight"
+                        min="0.1"
+                        step="0.1"
+                        placeholder="Weight in kg"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="quantity">Number of Packages *</label>
+
+                    <input
+                        type="number"
+                        id="quantity"
+                        name="quantity"
+                        min="1"
+                        value="1"
+                        required
+                    >
+                </div>
+
+                <div class="form-group full">
+                    <label for="description">Additional Information</label>
+
+                    <textarea
+                        id="description"
+                        name="additionalInfo"
+                        placeholder="Describe your shipment or special requirements"
+                    ></textarea>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <button type="submit" class="booking-submit">
+            Submit Shipment Request →
+        </button>
+
+        <p class="booking-note">
+            Your shipment request will be reviewed before confirmation.
+        </p>
+
+    </form>
+
+</main>
+
+
+<footer class="footer">
+
+    <div>
+        <a href="index.html" class="logo footer-logo">
+            ELITE<span>LOGISTICS</span>
+        </a>
+
+        <p>Moving Goods. Connecting Destinations.</p>
+    </div>
+
+    <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="tracking.html">Tracking</a>
+        <a href="booking.html">Booking</a>
+    </div>
+
+    <p class="copyright">
+        © 2026 Elite Logistics. All rights reserved.
+    </p>
+
+</footer>
+
+<script src="js/main.js"></script>
+<script type="module" src="js/booking.js"></script>
+
+</body>
+</html>

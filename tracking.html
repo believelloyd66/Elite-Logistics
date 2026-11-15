@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Track Shipment | Elite Logistics</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .tracking-hero {
+            background: #14243E;
+            color: white;
+            text-align: center;
+            padding: 90px 20px;
+        }
+
+        .tracking-hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .tracking-hero p {
+            color: #d5dce7;
+        }
+
+        .tracking-section {
+            max-width: 750px;
+            margin: 60px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .tracking-box {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            margin-top: 30px;
+        }
+
+        .tracking-box input {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin: 15px 0;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .tracking-box button {
+            width: 100%;
+            padding: 16px;
+            background: #D99A32;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .tracking-box button:hover {
+            background: #bd8121;
+        }
+
+        #trackingResult {
+            margin-top: 25px;
+            text-align: left;
+        }
+
+        .tracking-info {
+            background: #F3F5F8;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .tracking-info p {
+            margin: 12px 0;
+        }
+
+        .tracking-status {
+            color: #D99A32;
+            font-weight: bold;
+        }
+
+        .tracking-note {
+            color: #777;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        @media(max-width: 600px) {
+            .tracking-hero h1 {
+                font-size: 30px;
+            }
+
+            .tracking-box {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+
+        <a href="index.html" class="logo">
+            ELITE <span>LOGISTICS</span>
+        </a>
+
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+        <nav class="navigation" id="navigation">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="tracking.html">Track Shipment</a>
+            <a href="booking.html" class="header-btn">Book Delivery</a>
+        </nav>
+
+    </header>
+
+
+    <section class="tracking-hero">
+
+        <h1>Track Your Shipment</h1>
+
+        <p>
+            Stay informed about your delivery.
+            Enter your tracking number below.
+        </p>
+
+    </section>
+
+
+    <section class="tracking-section">
+
+        <h2>Where Is Your Package?</h2>
+
+        <p>
+            Enter the unique tracking number provided
+            after your shipment request.
+        </p>
+
+        <div class="tracking-box">
+
+            <form id="trackingForm">
+
+                <input
+                    type="text"
+                    id="trackingNumber"
+                    name="tracking"
+                    placeholder="Enter tracking number"
+                    required
+                >
+
+                <button type="submit">
+                    Track Shipment
+                </button>
+
+            </form>
+
+            <div id="trackingResult"></div>
+
+            <p class="tracking-note">
+                Your tracking information will appear here
+                once your shipment has been registered.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <h3>ELITE LOGISTICS</h3>
+
+            <p>
+                Delivering your world, one shipment at a time.
+            </p>
+
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="services.html">Services</a>
+                <a href="booking.html">Book Delivery</a>
+            </div>
+
+            <p>
+                © 2026 Elite Logistics. All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="js/main.js"></script>
+    <script type="module" src="js/tracking.js"></script>
+
+</body>
+</html>

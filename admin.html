@@ -1,0 +1,394 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Elite Logistics | Admin Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        body {
+            background: #F3F5F8;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .admin-header {
+            background: #14243E;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-header a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .login-box {
+            max-width: 400px;
+            margin: 80px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px #0001;
+        }
+
+        .login-box h2 {
+            color: #14243E;
+            margin-bottom: 10px;
+        }
+
+        .login-box p {
+            color: #777;
+            line-height: 1.6;
+        }
+
+        .login-box input {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .login-box button,
+        .logout-btn {
+            background: #D99A32;
+            color: white;
+            padding: 13px 20px;
+            border: 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .login-box button {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        #adminDashboard {
+            display: none;
+            max-width: 1100px;
+            margin: 35px auto;
+            padding: 20px;
+        }
+
+        .dashboard-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .dashboard-heading h1 {
+            color: #14243E;
+        }
+
+        .admin-panel {
+            background: white;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 3px 15px #00008;
+        }
+
+        .admin-panel h2 {
+            color: #14243E;
+        }
+
+        .admin-panel input,
+        .admin-panel select {
+            box-sizing: border-box;
+            padding: 13px;
+            margin: 8px 0;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .admin-panel button {
+            background: #14243E;
+            color: white;
+            padding: 12px 20px;
+            border: 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .statistics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .stat-card {
+            background: #F3F5F8;
+            padding: 18px;
+            border-radius: 7px;
+        }
+
+        .stat-card strong {
+            display: block;
+            font-size: 25px;
+            color: #14243E;
+            margin-top: 8px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th, td {
+            padding: 14px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
+
+        th {
+            background: #14243E;
+            color: white;
+        }
+
+        #loginMessage,
+        #searchMessage,
+        #updateMessage {
+            margin-top: 12px;
+            font-size: 14px;
+        }
+
+        #loginMessage {
+            color: #b00020;
+        }
+
+        @media (max-width: 600px) {
+            .login-box {
+                margin: 45px 15px;
+            }
+
+            #adminDashboard {
+                padding: 12px;
+            }
+
+            .statistics {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-panel {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="admin-header">
+    <strong>ELITE LOGISTICS — ADMIN</strong>
+    <a href="index.html">Visit Website</a>
+</header>
+
+<!-- ADMIN LOGIN -->
+
+<section class="login-box" id="loginBox">
+
+    <h2>Administrator Login</h2>
+
+    <p>Sign in using your approved administrator account.</p>
+
+    <form id="loginForm">
+
+        <input
+            type="email"
+            id="adminEmail"
+            placeholder="Administrator email"
+            autocomplete="username"
+            required
+        >
+
+        <input
+            type="password"
+            id="adminPassword"
+            placeholder="Password"
+            autocomplete="current-password"
+            required
+        >
+
+        <button type="submit">Login to Dashboard</button>
+
+    </form>
+
+    <p id="loginMessage" role="status"></p>
+
+</section>
+
+
+<!-- ADMIN DASHBOARD -->
+
+<main id="adminDashboard">
+
+    <div class="dashboard-heading">
+
+        <div>
+            <h1>Admin Dashboard</h1>
+            <p>Manage Elite Logistics shipments.</p>
+        </div>
+
+        <button class="logout-btn" id="logoutButton">
+            Logout
+        </button>
+
+    </div>
+
+
+    <!-- STATISTICS -->
+
+    <section class="admin-panel">
+
+        <h2>Shipment Overview</h2>
+
+        <div class="statistics">
+
+            <div class="stat-card">
+                Total Shipments
+                <strong id="totalShipments">0</strong>
+            </div>
+
+            <div class="stat-card">
+                In Transit
+                <strong id="inTransit">0</strong>
+            </div>
+
+            <div class="stat-card">
+                Delivered
+                <strong id="delivered">0</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SEARCH -->
+
+    <section class="admin-panel">
+
+        <h2>Find Shipment</h2>
+
+        <input
+            type="search"
+            id="adminSearch"
+            placeholder="Enter tracking number or customer name"
+        >
+
+        <button type="button" id="searchButton">
+            Search Shipments
+        </button>
+
+        <p id="searchMessage" role="status"></p>
+
+    </section>
+
+
+    <!-- UPDATE STATUS -->
+
+    <section class="admin-panel">
+
+        <h2>Update Shipment</h2>
+
+        <p>Enter the shipment tracking number and select its latest status.</p>
+
+        <input
+            type="text"
+            id="updateTracking"
+            placeholder="Enter tracking number"
+        >
+
+        <select id="shipmentStatus">
+
+            <option value="">Select shipment status</option>
+
+            <option value="Shipment Received">Shipment Received</option>
+
+            <option value="Processing">Processing</option>
+
+            <option value="Picked Up">Picked Up</option>
+
+            <option value="In Transit">In Transit</option>
+
+            <option value="Out for Delivery">Out for Delivery</option>
+
+            <option value="Delivered">Delivered</option>
+
+            <option value="Delivery Failed">Delivery Failed</option>
+
+        </select>
+
+        <button type="button" id="updateButton">
+            Update Shipment Status
+        </button>
+
+        <p id="updateMessage" role="status"></p>
+
+    </section>
+
+
+    <!-- ALL SHIPMENTS -->
+
+    <section class="admin-panel">
+
+        <h2>All Shipments</h2>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Tracking Number</th>
+                        <th>Customer</th>
+                        <th>Destination</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody id="shipmentTable">
+
+                    <tr>
+                        <td colspan="4">Loading shipments...</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script type="module" src="js/admin.js"></script>
+
+</body>
+</html>

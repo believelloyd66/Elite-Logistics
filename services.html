@@ -1,0 +1,393 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Our Services | Elite Logistics</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .services-hero {
+            background: #14243E;
+            color: white;
+            text-align: center;
+            padding: 85px 20px;
+        }
+
+        .services-hero h1 {
+            font-size: 43px;
+            margin-bottom: 12px;
+        }
+
+        .services-hero p {
+            color: #c7d0dc;
+        }
+
+        .services-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 75px 7%;
+        }
+
+        .services-intro {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 45px;
+        }
+
+        .services-intro h2 {
+            color: #14243E;
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .services-intro p {
+            color: #718096;
+        }
+
+        .services-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .service-item {
+            border: 1px solid #e7ebf0;
+            border-radius: 5px;
+            overflow: hidden;
+            background: white;
+            transition: 0.3s;
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(20,36,62,0.09);
+        }
+
+        .service-item img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .service-info {
+            padding: 25px;
+        }
+
+        .service-info h3 {
+            color: #14243E;
+            margin-bottom: 10px;
+            font-size: 21px;
+        }
+
+        .service-info p {
+            color: #718096;
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .service-info a {
+            display: inline-block;
+            color: #D99A32;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .service-benefits {
+            background: #F3F5F8;
+            padding: 65px 7%;
+            text-align: center;
+        }
+
+        .benefit-grid {
+            max-width: 1100px;
+            margin: 35px auto 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .benefit {
+            background: white;
+            padding: 28px 20px;
+            border-radius: 5px;
+        }
+
+        .benefit h3 {
+            color: #14243E;
+            margin-bottom: 10px;
+        }
+
+        .benefit p {
+            color: #718096;
+            font-size: 14px;
+        }
+
+        .service-cta {
+            background: #14243E;
+            color: white;
+            text-align: center;
+            padding: 70px 20px;
+        }
+
+        .service-cta h2 {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .service-cta p {
+            color: #c7d0dc;
+            margin-bottom: 25px;
+        }
+
+        @media(max-width: 700px) {
+            .services-hero h1 {
+                font-size: 34px;
+            }
+
+            .services-list {
+                grid-template-columns: 1fr;
+            }
+
+            .benefit-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <a href="index.html" class="logo">
+        ELITE<span>LOGISTICS</span>
+    </a>
+
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+    <nav class="navigation" id="navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html" class="active">Services</a>
+        <a href="tracking.html">Track Shipment</a>
+        <a href="booking.html">Book Delivery</a>
+    </nav>
+
+    <a href="booking.html" class="header-btn">Get Started</a>
+
+</header>
+
+
+<section class="services-hero">
+
+    <span class="small-heading">WHAT WE DO</span>
+
+    <h1>Our Logistics Services</h1>
+
+    <p>Flexible transportation and shipping solutions for your needs.</p>
+
+</section>
+
+
+<main>
+
+    <section class="services-container">
+
+        <div class="services-intro">
+
+            <span class="small-heading">OUR SOLUTIONS</span>
+
+            <h2>Moving Your Goods With Care</h2>
+
+            <p>
+                Explore our logistics service categories and find
+                a transportation solution that suits your shipment.
+            </p>
+
+        </div>
+
+
+        <div class="services-list">
+
+            <article class="service-item">
+
+                <img
+                    src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=900&q=85"
+                    alt="Road transportation truck"
+                >
+
+                <div class="service-info">
+
+                    <h3>Road Transportation</h3>
+
+                    <p>
+                        Transportation solutions for goods moving
+                        between cities and destinations. Suitable for
+                        business shipments and general cargo.
+                    </p>
+
+                    <a href="booking.html">Book This Service →</a>
+
+                </div>
+
+            </article>
+
+
+            <article class="service-item">
+
+                <img
+                    src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=900&q=85"
+                    alt="Air freight aircraft"
+                >
+
+                <div class="service-info">
+
+                    <h3>Air Freight</h3>
+
+                    <p>
+                        Air cargo solutions for shipments that require
+                        efficient transportation across longer
+                        distances.
+                    </p>
+
+                    <a href="booking.html">Book This Service →</a>
+
+                </div>
+
+            </article>
+
+
+            <article class="service-item">
+
+                <img
+                    src="https://images.unsplash.com/photo-1494412519320-aa613dfb7738?auto=format&fit=crop&w=900&q=85"
+                    alt="Sea freight cargo ship"
+                >
+
+                <div class="service-info">
+
+                    <h3>Sea Freight</h3>
+
+                    <p>
+                        Cargo shipping solutions for larger shipments
+                        and international transportation requirements.
+                    </p>
+
+                    <a href="booking.html">Book This Service →</a>
+
+                </div>
+
+            </article>
+
+
+            <article class="service-item">
+
+                <img
+                    src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=900&q=85"
+                    alt="Modern logistics warehouse"
+                >
+
+                <div class="service-info">
+
+                    <h3>Warehousing</h3>
+
+                    <p>
+                        Storage and cargo handling solutions designed
+                        to help organize and manage goods before
+                        transportation.
+                    </p>
+
+                    <a href="booking.html">Make An Enquiry →</a>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <section class="service-benefits">
+
+        <span class="small-heading">THE ELITE APPROACH</span>
+
+        <h2>Why Choose Our Services?</h2>
+
+        <div class="benefit-grid">
+
+            <div class="benefit">
+                <h3>Dependability</h3>
+                <p>
+                    Organized shipment handling and delivery updates.
+                </p>
+            </div>
+
+            <div class="benefit">
+                <h3>Transparency</h3>
+                <p>
+                    Shipment information and status visibility.
+                </p>
+            </div>
+
+            <div class="benefit">
+                <h3>Convenience</h3>
+                <p>
+                    Simple booking and shipment tracking.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="service-cta">
+
+        <h2>Need To Move Something?</h2>
+
+        <p>Submit your shipment details to get started.</p>
+
+        <a href="booking.html" class="primary-btn">
+            Book A Shipment →
+        </a>
+
+    </section>
+
+</main>
+
+
+<footer class="footer">
+
+    <div>
+        <a href="index.html" class="logo footer-logo">
+            ELITE<span>LOGISTICS</span>
+        </a>
+
+        <p>Moving Goods. Connecting Destinations.</p>
+    </div>
+
+    <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="tracking.html">Tracking</a>
+        <a href="booking.html">Booking</a>
+    </div>
+
+    <p class="copyright">
+        © 2026 Elite Logistics. All rights reserved.
+    </p>
+
+</footer>
+
+<script src="js/main.js"></script>
+
+</body>
+</html>

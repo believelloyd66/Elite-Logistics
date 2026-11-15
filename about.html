@@ -1,0 +1,278 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About Us | Elite Logistics</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .about-hero {
+            background: #14243E;
+            color: white;
+            padding: 85px 8%;
+            text-align: center;
+        }
+
+        .about-hero h1 {
+            font-size: 43px;
+            margin-bottom: 12px;
+        }
+
+        .about-hero p {
+            color: #c7d0dc;
+        }
+
+        .about-container {
+            padding: 75px 8%;
+            max-width: 1250px;
+            margin: auto;
+        }
+
+        .about-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-intro img {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .about-intro h2 {
+            color: #14243E;
+            font-size: 32px;
+            margin-bottom: 18px;
+        }
+
+        .about-intro p {
+            color: #718096;
+            margin-bottom: 15px;
+            line-height: 1.9;
+        }
+
+        .mission-section {
+            background: #F3F5F8;
+            padding: 65px 8%;
+            text-align: center;
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            max-width: 1100px;
+            margin: 35px auto 0;
+        }
+
+        .mission-card {
+            background: white;
+            padding: 30px 22px;
+            border-radius: 5px;
+            border-bottom: 3px solid #D99A32;
+        }
+
+        .mission-card h3 {
+            color: #14243E;
+            margin-bottom: 12px;
+        }
+
+        .mission-card p {
+            color: #718096;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .about-cta {
+            padding: 65px 20px;
+            text-align: center;
+            background: #14243E;
+            color: white;
+        }
+
+        .about-cta p {
+            color: #c7d0dc;
+            margin: 12px 0 25px;
+        }
+
+        @media(max-width: 700px) {
+            .about-hero h1 {
+                font-size: 34px;
+            }
+
+            .about-intro {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .mission-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <a href="index.html" class="logo">
+        ELITE<span>LOGISTICS</span>
+    </a>
+
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+    <nav class="navigation" id="navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="services.html">Services</a>
+        <a href="tracking.html">Track Shipment</a>
+        <a href="booking.html">Book Delivery</a>
+    </nav>
+
+    <a href="booking.html" class="header-btn">Get Started</a>
+
+</header>
+
+
+<section class="about-hero">
+
+    <span class="small-heading">GET TO KNOW US</span>
+
+    <h1>About Elite Logistics</h1>
+
+    <p>Dependable logistics. Professional service. Better connections.</p>
+
+</section>
+
+
+<main>
+
+    <section class="about-container">
+
+        <div class="about-intro">
+
+            <div>
+                <img
+                    src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=900&q=85"
+                    alt="Logistics warehouse"
+                >
+            </div>
+
+            <div>
+
+                <span class="small-heading">WHO WE ARE</span>
+
+                <h2>Moving Goods With Purpose.</h2>
+
+                <p>
+                    Elite Logistics is a logistics and transportation
+                    brand focused on providing organized and dependable
+                    shipping solutions.
+                </p>
+
+                <p>
+                    Our goal is to make the movement of goods easier
+                    through professional service, efficient delivery
+                    management and clear communication.
+                </p>
+
+                <p>
+                    From individual shipments to business logistics,
+                    we aim to provide solutions that help people and
+                    businesses connect with their destinations.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="mission-section">
+
+        <span class="small-heading">OUR FOUNDATION</span>
+
+        <h2>What Drives Us</h2>
+
+        <div class="mission-grid">
+
+            <div class="mission-card">
+                <h3>Our Mission</h3>
+                <p>
+                    To provide dependable and accessible logistics
+                    solutions that make shipping easier for customers
+                    and businesses.
+                </p>
+            </div>
+
+            <div class="mission-card">
+                <h3>Our Vision</h3>
+                <p>
+                    To become a trusted logistics brand known for
+                    professionalism, reliability and excellent service.
+                </p>
+            </div>
+
+            <div class="mission-card">
+                <h3>Our Values</h3>
+                <p>
+                    Reliability, transparency, responsibility,
+                    professionalism and customer satisfaction.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="about-cta">
+
+        <h2>Let's Move Forward Together.</h2>
+
+        <p>Have a shipment to send? Let's help you get started.</p>
+
+        <a href="booking.html" class="primary-btn">
+            Book A Shipment →
+        </a>
+
+    </section>
+
+</main>
+
+
+<footer class="footer">
+
+    <div>
+        <a href="index.html" class="logo footer-logo">
+            ELITE<span>LOGISTICS</span>
+        </a>
+
+        <p>Moving Goods. Connecting Destinations.</p>
+    </div>
+
+    <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="tracking.html">Tracking</a>
+        <a href="booking.html">Booking</a>
+    </div>
+
+    <p class="copyright">
+        © 2026 Elite Logistics. All rights reserved.
+    </p>
+
+</footer>
+
+<script src="js/main.js"></script>
+
+</body>
+</html>

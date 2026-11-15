@@ -1,9 +1,12 @@
+
 import { db, auth } from "../firebase-config.js";
 
 import {
     signInWithEmailAndPassword,
     onAuthStateChanged,
-    signOut
+    signOut,
+    sendEmailVerification,
+    reload
 } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
 
 import {
@@ -39,12 +42,90 @@ const shipmentStatus = document.getElementById("shipmentStatus");
 const updateMessage = document.getElementById("updateMessage");
 
 let shipments = [];
+let verificationButton = null;
 
 // SHOW MESSAGE
 function showMessage(element, message) {
     if (element) {
         element.textContent = message;
     }
+}
+
+// SHOW ADMIN DASHBOARD
+async function showAdminDashboard() {
+    if (loginBox) loginBox.style.display = "none";
+    if (dashboard) dashboard.style.display = "block";
+
+    if (verificationButton) {
+        verificationButton.remove();
+        verificationButton = null;
+    }
+
+    await loadShipments();
+}
+
+// CREATE VERIFICATION CHECK BUTTON
+function createVerificationButton() {
+    if (verificationButton || !loginMessage) return;
+
+    verificationButton = document.createElement("button");
+
+    verificationButton.type = "button";
+    verificationButton.textContent =
+        "I've verified my email — check again";
+
+    verificationButton.style.display = "block";
+    verificationButton.style.marginTop = "12px";
+    verificationButton.style.padding = "10px 15px";
+    verificationButton.style.cursor = "pointer";
+
+    verificationButton.addEventListener("click", async () => {
+        const user = auth.currentUser;
+
+        if (!user) {
+            showMessage(loginMessage, "Please log in again.");
+            return;
+        }
+
+        verificationButton.disabled = true;
+        showMessage(loginMessage, "Checking verification...");
+
+        try {
+            await reload(user);
+
+            if (user.emailVerified) {
+                showMessage(
+                    loginMessage,
+                    "Email verified. Opening admin dashboard..."
+                );
+
+                await showAdminDashboard();
+            } else {
+                showMessage(
+                    loginMessage,
+                    "Your email is not verified yet. Open the verification email and click its link."
+                );
+            }
+
+        } catch (error) {
+            console.error("Verification check error:", error);
+
+            showMessage(
+                loginMessage,
+                "Unable to check verification. Please try again."
+            );
+
+        } finally {
+            if (verificationButton) {
+                verificationButton.disabled = false;
+            }
+        }
+    });
+
+    loginMessage.insertAdjacentElement(
+        "afterend",
+        verificationButton
+    );
 }
 
 // ADMIN LOGIN
@@ -54,7 +135,8 @@ if (loginForm) {
 
         const email = document
             .getElementById("adminEmail")
-            .value.trim().toLowerCase();
+            .value.trim()
+            .toLowerCase();
 
         const password = document
             .getElementById("adminPassword")
@@ -71,19 +153,41 @@ if (loginForm) {
         showMessage(loginMessage, "Checking login...");
 
         try {
-            await signInWithEmailAndPassword(
+            const result = await signInWithEmailAndPassword(
                 auth,
                 email,
                 password
             );
 
-        } catch (error) {
-            console.error("Login error:", error);
+            if (!result.user.emailVerified) {
+                await sendEmailVerification(result.user);
+
+                showMessage(
+                    loginMessage,
+                    "Verification email sent. Check your inbox and click the verification link."
+                );
+
+                createVerificationButton();
+                return;
+            }
 
             showMessage(
                 loginMessage,
-                "Login failed. Check your email and password."
+                "Login successful. Opening dashboard..."
             );
+
+        } catch (error) {
+            console.error("Login error:", error);
+
+            let message = "Login failed. Check your email and password.";
+
+            if (error.code === "auth/too-many-requests") {
+                message = "Too many attempts. Please try again later.";
+            } else if (error.code === "auth/invalid-credential") {
+                message = "Incorrect email or password.";
+            }
+
+            showMessage(loginMessage, message);
         }
     });
 }
@@ -96,6 +200,12 @@ onAuthStateChanged(auth, async (user) => {
     if (!user) {
         loginBox.style.display = "block";
         dashboard.style.display = "none";
+
+        if (verificationButton) {
+            verificationButton.remove();
+            verificationButton = null;
+        }
+
         return;
     }
 
@@ -103,22 +213,30 @@ onAuthStateChanged(auth, async (user) => {
         ? user.email.toLowerCase()
         : "";
 
-    if (
-        !approvedAdmins.includes(email) ||
-        !user.emailVerified
-    ) {
-        alert(
-            "Access denied. A verified administrator account is required."
+    if (!approvedAdmins.includes(email)) {
+        showMessage(
+            loginMessage,
+            "This email is not authorized."
         );
 
         await signOut(auth);
         return;
     }
 
-    loginBox.style.display = "none";
-    dashboard.style.display = "block";
+    if (!user.emailVerified) {
+        loginBox.style.display = "block";
+        dashboard.style.display = "none";
 
-    await loadShipments();
+        showMessage(
+            loginMessage,
+            "Your email needs verification before you can access the dashboard."
+        );
+
+        createVerificationButton();
+        return;
+    }
+
+    await showAdminDashboard();
 });
 
 // LOGOUT
@@ -150,7 +268,6 @@ async function loadShipments() {
             ...document.data()
         }));
 
-        // NEWEST SHIPMENTS FIRST
         shipments.sort((a, b) => {
             const dateA = a.createdAt?.toMillis?.() || 0;
             const dateB = b.createdAt?.toMillis?.() || 0;
@@ -170,6 +287,7 @@ async function loadShipments() {
         }
     }
 }
+
 // DISPLAY SHIPMENTS
 function displayShipments(records) {
 
@@ -288,7 +406,7 @@ if (updateButton) {
         }
 
         const shipment = shipments.find(item =>
-            item.trackingNumber === trackingNumber
+            shipment.trackingNumber === trackingNumber
         );
 
         if (!shipment) {

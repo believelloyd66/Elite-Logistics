@@ -328,10 +328,16 @@ async function sendMessage() {
         }
 
     } catch (error) {
-        console.error("Send message error:", error);
-        showStatus("Message could not be sent. Please try again.");
+    console.error("Send message error:", error);
 
-    } finally {
+    showStatus(
+        "ERROR: " +
+        (error.code || "unknown") +
+        " - " +
+        (error.message || "No error details available")
+    );
+
+} finally {
         isSending = false;
         sendButton.disabled = false;
         messageInput.focus();

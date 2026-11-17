@@ -1,0 +1,348 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Support | Elite Logistics</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #F3F5F8;
+            color: #14243E;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #14243E;
+            padding: 18px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+        }
+
+        .logo {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #D99A32;
+        }
+
+        .back-link {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        main {
+            max-width: 850px;
+            margin: 45px auto;
+            padding: 0 18px;
+        }
+
+        .page-heading {
+            margin-bottom: 25px;
+        }
+
+        .page-heading h1 {
+            font-size: 28px;
+            margin-bottom: 9px;
+        }
+
+        .page-heading p {
+            color: #718096;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .chat-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(20,36,62,0.07);
+            display: flex;
+            flex-direction: column;
+            height: 570px;
+        }
+
+        .chat-header {
+            background: #14243E;
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            flex-shrink: 0;
+        }
+
+        .support-icon {
+            width: 43px;
+            height: 43px;
+            border-radius: 50%;
+            background: #D99A32;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .chat-header h2 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .chat-header p {
+            color: #C4CEDB;
+            font-size: 12px;
+        }
+
+        .chat-body {
+            flex: 1;
+            min-height: 0;
+            padding: 22px;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            background: #FAFBFC;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .welcome-message,
+        .message {
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 80%;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+            white-space: pre-wrap;
+        }
+
+        /* Welcome message and admin replies */
+
+        .welcome-message,
+        .message.received {
+            align-self: flex-start;
+            background: white;
+            border: 1px solid #E7EBF0;
+            color: #526176;
+            border-radius: 10px 10px 10px 2px;
+        }
+
+        /* Customer messages */
+
+        .message.sent {
+            align-self: flex-end;
+            background: #14243E;
+            color: white;
+            border-radius: 10px 10px 2px 10px;
+        }
+
+        .message small {
+            display: block;
+            font-size: 10px;
+            color: #98A2B3;
+            margin-top: 8px;
+        }
+
+        .message.sent small {
+            color: #C4CEDB;
+        }
+
+        .chat-footer {
+            padding: 16px;
+            border-top: 1px solid #E7EBF0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            flex-shrink: 0;
+        }
+
+        .chat-footer textarea {
+            flex: 1;
+            resize: none;
+            height: 48px;
+            padding: 14px;
+            border: 1px solid #DCE2EA;
+            border-radius: 7px;
+            outline: none;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        .chat-footer textarea:focus {
+            border-color: #D99A32;
+        }
+
+        .send-button {
+            height: 48px;
+            padding: 0 20px;
+            border: none;
+            border-radius: 7px;
+            background: #D99A32;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .send-button:hover {
+            background: #BD8120;
+        }
+
+        .send-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .notice {
+            text-align: center;
+            color: #8A94A4;
+            font-size: 11px;
+            padding: 12px;
+            background: white;
+            flex-shrink: 0;
+        }
+
+        #chatStatus {
+            padding: 0 16px 10px;
+            color: #718096;
+            background: white;
+            font-size: 12px;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 17px 5%;
+            }
+
+            .logo {
+                font-size: 17px;
+            }
+
+            main {
+                margin: 30px auto;
+            }
+
+            .page-heading h1 {
+                font-size: 24px;
+            }
+
+            .chat-container {
+                height: 65vh;
+                min-height: 430px;
+            }
+
+            .chat-body {
+                padding: 15px;
+            }
+
+            .chat-footer {
+                padding: 11px;
+            }
+
+            .send-button {
+                padding: 0 14px;
+            }
+
+            .message,
+            .welcome-message {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <a href="index.html" class="logo">
+        ELITE<span>LOGISTICS</span>
+    </a>
+
+    <a href="index.html" class="back-link">
+        ← Back to website
+    </a>
+</header>
+
+<main>
+
+    <div class="page-heading">
+        <h1>Help & Support</h1>
+
+        <p>
+            Have a question or need assistance?
+            Send us a message and our team will respond.
+        </p>
+    </div>
+
+    <section class="chat-container">
+
+        <div class="chat-header">
+
+            <div class="support-icon">✉</div>
+
+            <div>
+                <h2>Elite Logistics Support</h2>
+                <p>Customer Service</p>
+            </div>
+
+        </div>
+
+        <div class="chat-body" id="chatBody">
+
+            <div class="welcome-message" id="welcomeMessage">
+                Welcome to Elite Logistics Support.
+                Send us a message and our customer service
+                team will get back to you.
+
+                <span class="message-time">Support</span>
+            </div>
+
+        </div>
+
+        <div class="chat-footer">
+
+            <textarea
+                id="messageInput"
+                placeholder="Type your message..."
+                maxlength="2000"
+            ></textarea>
+
+            <button
+                class="send-button"
+                id="sendButton"
+                type="button"
+            >
+                Send
+            </button>
+
+        </div>
+
+        <p id="chatStatus" role="status"></p>
+
+        <div class="notice">
+            Messages will be retained for up to 7 days.
+        </div>
+
+    </section>
+
+</main>
+
+<script type="module" src="js/support.js"></script>
+
+</body>
+</html>

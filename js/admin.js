@@ -405,8 +405,9 @@ if (updateButton) {
             return;
         }
 
+        // FIXED: Use item.trackingNumber here
         const shipment = shipments.find(item =>
-            shipment.trackingNumber === trackingNumber
+            item.trackingNumber === trackingNumber
         );
 
         if (!shipment) {

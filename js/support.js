@@ -1,5 +1,5 @@
 
-import { db, auth } from "../firebase-config.js";
+import { db, customerAuth } from "../firebase-config.js";
 
 import {
     signInAnonymously,

@@ -10,7 +10,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
 
 const firebaseConfig = {
-    apiKey: "YOUR_EXISTING_API_KEY",
+    apiKey: "AIzaSyA1aC4qP3FMdV-tLgr0JejuP2LuZ2MEn44",
     authDomain: "elite-logistics-89f69.firebaseapp.com",
     projectId: "elite-logistics-89f69",
     storageBucket: "elite-logistics-89f69.firebasestorage.app",
@@ -27,9 +27,10 @@ const customerApp = initializeApp(
     "customer-support"
 );
 
-// Shared Firestore database
+// Administrator database and authentication
 export const db = getFirestore(app);
-
-// Separate authentication sessions
 export const auth = getAuth(app);
+
+// Customer database and authentication
+export const customerDb = getFirestore(customerApp);
 export const customerAuth = getAuth(customerApp);

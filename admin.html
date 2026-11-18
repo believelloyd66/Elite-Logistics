@@ -1,117 +1,377 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>About Us | Elite Logistics</title>
+    <title>Elite Logistics | Admin Dashboard</title>
 
     <link rel="stylesheet" href="css/style.css">
 
     <style>
-        .about-hero {
+        body {
+            background: #F3F5F8;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .admin-header {
             background: #14243E;
             color: white;
-            padding: 85px 8%;
-            text-align: center;
-        }
-
-        .about-hero h1 {
-            font-size: 43px;
-            margin-bottom: 12px;
-        }
-
-        .about-hero p {
-            color: #c7d0dc;
-        }
-
-        .about-container {
-            padding: 75px 8%;
-            max-width: 1250px;
-            margin: auto;
-        }
-
-        .about-intro {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
         }
 
-        .about-intro img {
+        .admin-header a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .login-box {
+            max-width: 400px;
+            margin: 80px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px #0001;
+        }
+
+        .login-box h2 {
+            color: #14243E;
+            margin-bottom: 10px;
+        }
+
+        .login-box p {
+            color: #777;
+            line-height: 1.6;
+        }
+
+        .login-box input {
+            box-sizing: border-box;
             width: 100%;
+            padding: 14px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
             border-radius: 5px;
         }
 
-        .about-intro h2 {
+        .login-box button,
+        .logout-btn {
+            background: #D99A32;
+            color: white;
+            padding: 13px 20px;
+            border: 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .login-box button {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        #adminDashboard {
+            display: none;
+            max-width: 1100px;
+            margin: 35px auto;
+            padding: 20px;
+        }
+
+        .dashboard-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .dashboard-heading h1 {
             color: #14243E;
-            font-size: 32px;
-            margin-bottom: 18px;
         }
 
-        .about-intro p {
-            color: #718096;
-            margin-bottom: 15px;
-            line-height: 1.9;
+        .admin-panel {
+            background: white;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 3px 15px #00008;
         }
 
-        .mission-section {
-            background: #F3F5F8;
-            padding: 65px 8%;
-            text-align: center;
+        .admin-panel h2 {
+            color: #14243E;
         }
 
-        .mission-grid {
+        .admin-panel input,
+        .admin-panel select {
+            box-sizing: border-box;
+            padding: 13px;
+            margin: 8px 0;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .admin-panel button {
+            background: #14243E;
+            color: white;
+            padding: 12px 20px;
+            border: 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .statistics {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 22px;
-            max-width: 1100px;
-            margin: 35px auto 0;
+            gap: 15px;
         }
 
-        .mission-card {
-            background: white;
-            padding: 30px 22px;
-            border-radius: 5px;
-            border-bottom: 3px solid #D99A32;
+        .stat-card {
+            background: #F3F5F8;
+            padding: 18px;
+            border-radius: 7px;
         }
 
-        .mission-card h3 {
+        .stat-card strong {
+            display: block;
+            font-size: 25px;
             color: #14243E;
-            margin-bottom: 12px;
+            margin-top: 8px;
         }
 
-        .mission-card p {
-            color: #718096;
-            font-size: 14px;
-            line-height: 1.8;
+        .table-wrapper {
+            overflow-x: auto;
         }
 
-        .about-cta {
-            padding: 65px 20px;
-            text-align: center;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th, td {
+            padding: 14px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
+
+        th {
             background: #14243E;
             color: white;
         }
 
-        .about-cta p {
-            color: #c7d0dc;
-            margin: 12px 0 25px;
+        #loginMessage,
+        #searchMessage,
+        #updateMessage {
+            margin-top: 12px;
+            font-size: 14px;
         }
 
-        @media(max-width: 700px) {
-            .about-hero h1 {
-                font-size: 34px;
+        #loginMessage {
+            color: #b00020;
+        }
+
+        /* SUPPORT CHAT SECTION */
+
+        .support-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 18px;
+            min-height: 480px;
+        }
+
+        .support-conversations {
+            border: 1px solid #e5e8ed;
+            border-radius: 7px;
+            overflow-y: auto;
+            max-height: 550px;
+        }
+
+        .support-conversation {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            background: white;
+        }
+
+        .support-conversation:hover,
+        .support-conversation.active {
+            background: #F3F5F8;
+        }
+
+        .support-conversation strong {
+            display: block;
+            color: #14243E;
+            margin-bottom: 6px;
+        }
+
+        .support-conversation small {
+            color: #777;
+            display: block;
+            line-height: 1.4;
+        }
+
+        .support-unread {
+            display: inline-block;
+            background: #D99A32;
+            color: white;
+            border-radius: 20px;
+            padding: 3px 8px;
+            font-size: 11px;
+            margin-top: 8px;
+        }
+
+        .support-chat {
+            border: 1px solid #e5e8ed;
+            border-radius: 7px;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            min-height: 480px;
+        }
+
+        .support-chat-header {
+            padding: 15px;
+            background: #14243E;
+            color: white;
+            border-radius: 6px 6px 0 0;
+        }
+
+        .support-chat-header strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .support-chat-header small {
+            color: #d6dce5;
+        }
+
+        .support-chat-messages {
+            flex: 1;
+            min-height: 300px;
+            max-height: 420px;
+            overflow-y: auto;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: #F8F9FB;
+        }
+
+        .admin-chat-message {
+            max-width: 80%;
+            padding: 11px 13px;
+            border-radius: 10px;
+            line-height: 1.5;
+            overflow-wrap: anywhere;
+            white-space: pre-wrap;
+            font-size: 14px;
+        }
+
+        .admin-chat-message.customer {
+            align-self: flex-start;
+            background: white;
+            color: #333;
+            border: 1px solid #e5e8ed;
+        }
+
+        .admin-chat-message.admin {
+            align-self: flex-end;
+            background: #14243E;
+            color: white;
+        }
+
+        .admin-chat-message small {
+            display: block;
+            margin-top: 6px;
+            font-size: 10px;
+            opacity: 0.7;
+        }
+
+        .support-reply-area {
+            padding: 12px;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+
+        .support-reply-area textarea {
+            flex: 1;
+            min-width: 0;
+            min-height: 48px;
+            max-height: 120px;
+            resize: vertical;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+        }
+
+        .support-reply-area button {
+            background: #D99A32;
+            white-space: nowrap;
+        }
+
+        #supportChatStatus,
+        #supportListStatus {
+            color: #777;
+            font-size: 13px;
+            padding: 10px 0;
+        }
+
+        .support-empty {
+            color: #888;
+            text-align: center;
+            padding: 25px 10px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 700px) {
+            .login-box {
+                margin: 45px 15px;
             }
 
-            .about-intro {
-                grid-template-columns: 1fr;
-                gap: 30px;
+            #adminDashboard {
+                padding: 12px;
             }
 
-            .mission-grid {
+            .statistics {
                 grid-template-columns: 1fr;
+            }
+
+            .admin-panel {
+                padding: 18px;
+            }
+
+            .support-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .support-conversations {
+                max-height: 220px;
+            }
+
+            .support-chat {
+                min-height: 450px;
+            }
+
+            .support-reply-area {
+                flex-wrap: wrap;
+            }
+
+            .support-reply-area button {
+                width: 100%;
             }
         }
     </style>
@@ -119,116 +379,173 @@
 
 <body>
 
-<header class="header">
-
-    <a href="index.html" class="logo">
-        ELITE<span>LOGISTICS</span>
-    </a>
-
-    <button class="menu-btn" onclick="toggleMenu()">☰</button>
-
-    
-<nav class="navigation" id="navigation">
-    <a href="index.html" class="active">Home</a>
-    <a href="about.html">About</a>
-    <a href="services.html">Services</a>
-    <a href="tracking.html">Track Shipment</a>
-    <a href="booking.html">Book Delivery</a>
-    <a href="support.html">Help & Support</a>
-</nav>
-
-
-    <a href="booking.html" class="header-btn">Get Started</a>
-
+<header class="admin-header">
+    <strong>ELITE LOGISTICS — ADMIN</strong>
+    <a href="index.html">Visit Website</a>
 </header>
 
+<!-- ADMIN LOGIN -->
 
-<section class="about-hero">
+<section class="login-box" id="loginBox">
 
-    <span class="small-heading">GET TO KNOW US</span>
+    <h2>Administrator Login</h2>
 
-    <h1>About Elite Logistics</h1>
+    <p>Sign in using your approved administrator account.</p>
 
-    <p>Dependable logistics. Professional service. Better connections.</p>
+    <form id="loginForm">
+
+        <input
+            type="email"
+            id="adminEmail"
+            placeholder="Administrator email"
+            autocomplete="username"
+            required
+        >
+
+        <input
+            type="password"
+            id="adminPassword"
+            placeholder="Password"
+            autocomplete="current-password"
+            required
+        >
+
+        <button type="submit">Login to Dashboard</button>
+
+    </form>
+
+    <p id="loginMessage" role="status"></p>
 
 </section>
 
 
-<main>
+<!-- ADMIN DASHBOARD -->
 
-    <section class="about-container">
+<main id="adminDashboard">
 
-        <div class="about-intro">
+    <div class="dashboard-heading">
 
-            <div>
-                <img
-                    src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=900&q=85"
-                    alt="Logistics warehouse"
+        <div>
+            <h1>Admin Dashboard</h1>
+            <p>Manage Elite Logistics shipments and customer support.</p>
+        </div>
+
+        <button class="logout-btn" id="logoutButton">
+            Logout
+        </button>
+
+    </div>
+
+
+    <!-- STATISTICS -->
+
+    <section class="admin-panel">
+
+        <h2>Shipment Overview</h2>
+
+        <div class="statistics">
+
+            <div class="stat-card">
+                Total Shipments
+                <strong id="totalShipments">0</strong>
+            </div>
+
+            <div class="stat-card">
+                In Transit
+                <strong id="inTransit">0</strong>
+            </div>
+
+            <div class="stat-card">
+                Delivered
+                <strong id="delivered">0</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SUPPORT CHATS -->
+
+    <section class="admin-panel" id="supportSection">
+
+        <h2>Customer Support Chats</h2>
+
+        <p>Read customer messages and reply manually.</p>
+
+        <p id="supportListStatus" role="status">
+            Loading conversations...
+        </p>
+
+        <div class="support-layout">
+
+            <!-- CONVERSATION LIST -->
+
+            <div
+                class="support-conversations"
+                id="supportConversationList"
+            >
+                <div class="support-empty">
+                    No conversations loaded yet.
+                </div>
+            </div>
+
+
+            <!-- SELECTED CONVERSATION -->
+
+            <div class="support-chat">
+
+                <div class="support-chat-header">
+
+                    <strong id="supportCustomerTitle">
+                        Select a conversation
+                    </strong>
+
+                    <small id="supportCustomerSubtitle">
+                        Customer messages will appear here.
+                    </small>
+
+                </div>
+
+                <div
+                    class="support-chat-messages"
+                    id="adminSupportMessages"
                 >
-            </div>
 
-            <div>
+                    <div class="support-empty">
+                        Select a customer conversation to view messages.
+                    </div>
 
-                <span class="small-heading">WHO WE ARE</span>
+                </div>
 
-                <h2>Moving Goods With Purpose.</h2>
+                <p
+                    id="supportChatStatus"
+                    role="status"
+                ></p>
 
-                <p>
-                    Elite Logistics is a logistics and transportation
-                    brand focused on providing organized and dependable
-                    shipping solutions.
-                </p>
+                <form
+                    class="support-reply-area"
+                    id="supportReplyForm"
+                >
 
-                <p>
-                    Our goal is to make the movement of goods easier
-                    through professional service, efficient delivery
-                    management and clear communication.
-                </p>
+                    <textarea
+                        id="supportReplyInput"
+                        maxlength="2000"
+                        placeholder="Write your reply..."
+                        disabled
+                        required
+                    ></textarea>
 
-                <p>
-                    From individual shipments to business logistics,
-                    we aim to provide solutions that help people and
-                    businesses connect with their destinations.
-                </p>
+                    <button
+                        type="submit"
+                        id="supportReplyButton"
+                        disabled
+                    >
+                        Send Reply
+                    </button>
 
-            </div>
+                </form>
 
-        </div>
-
-    </section>
-
-
-    <section class="mission-section">
-
-        <span class="small-heading">OUR FOUNDATION</span>
-
-        <h2>What Drives Us</h2>
-
-        <div class="mission-grid">
-
-            <div class="mission-card">
-                <h3>Our Mission</h3>
-                <p>
-                    To provide dependable and accessible logistics
-                    solutions that make shipping easier for customers
-                    and businesses.
-                </p>
-            </div>
-
-            <div class="mission-card">
-                <h3>Our Vision</h3>
-                <p>
-                    To become a trusted logistics brand known for
-                    professionalism, reliability and excellent service.
-                </p>
-            </div>
-
-            <div class="mission-card">
-                <h3>Our Values</h3>
-                <p>
-                    Reliability, transparency, responsibility,
-                    professionalism and customer satisfaction.
-                </p>
             </div>
 
         </div>
@@ -236,46 +553,108 @@
     </section>
 
 
-    <section class="about-cta">
+    <!-- SEARCH -->
 
-        <h2>Let's Move Forward Together.</h2>
+    <section class="admin-panel">
 
-        <p>Have a shipment to send? Let's help you get started.</p>
+        <h2>Find Shipment</h2>
 
-        <a href="booking.html" class="primary-btn">
-            Book A Shipment →
-        </a>
+        <input
+            type="search"
+            id="adminSearch"
+            placeholder="Enter tracking number or customer name"
+        >
+
+        <button type="button" id="searchButton">
+            Search Shipments
+        </button>
+
+        <p id="searchMessage" role="status"></p>
+
+    </section>
+
+
+    <!-- UPDATE STATUS -->
+
+    <section class="admin-panel">
+
+        <h2>Update Shipment</h2>
+
+        <p>Enter the shipment tracking number and select its latest status.</p>
+
+        <input
+            type="text"
+            id="updateTracking"
+            placeholder="Enter tracking number"
+        >
+
+        <select id="shipmentStatus">
+
+            <option value="">Select shipment status</option>
+
+            <option value="Shipment Received">Shipment Received</option>
+
+            <option value="Processing">Processing</option>
+
+            <option value="Picked Up">Picked Up</option>
+
+            <option value="In Transit">In Transit</option>
+
+            <option value="Out for Delivery">Out for Delivery</option>
+
+            <option value="Delivered">Delivered</option>
+
+            <option value="Delivery Failed">Delivery Failed</option>
+
+        </select>
+
+        <button type="button" id="updateButton">
+            Update Shipment Status
+        </button>
+
+        <p id="updateMessage" role="status"></p>
+
+    </section>
+
+
+    <!-- ALL SHIPMENTS -->
+
+    <section class="admin-panel">
+
+        <h2>All Shipments</h2>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Tracking Number</th>
+                        <th>Customer</th>
+                        <th>Destination</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody id="shipmentTable">
+
+                    <tr>
+                        <td colspan="4">Loading shipments...</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
 
     </section>
 
 </main>
 
 
-<footer class="footer">
-
-    <div>
-        <a href="index.html" class="logo footer-logo">
-            ELITE<span>LOGISTICS</span>
-        </a>
-
-        <p>Moving Goods. Connecting Destinations.</p>
-    </div>
-
-    <div class="footer-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="services.html">Services</a>
-        <a href="tracking.html">Tracking</a>
-        <a href="booking.html">Booking</a>
-    </div>
-
-    <p class="copyright">
-        © 2026 Elite Logistics. All rights reserved.
-    </p>
-
-</footer>
-
-<script src="js/main.js"></script>
+<script type="module" src="js/admin.js"></script>
+<script type="module" src="js/admin-support.js"></script>
 
 </body>
 </html>

@@ -1,5 +1,5 @@
 
-import { db, customerAuth } from "../firebase-config.js";
+import { customerDb as db, customerAuth } from "../firebase-config.js";
 
 import {
     signInAnonymously,
@@ -52,7 +52,7 @@ function getExpiryDate() {
 function waitForAuth() {
     return new Promise((resolve, reject) => {
         const unsubscribe = onAuthStateChanged(
-            auth,
+            customerAuth,
             user => {
                 unsubscribe();
                 resolve(user);
@@ -194,15 +194,13 @@ async function initializeChat() {
         let user = await waitForAuth();
 
         if (user && !user.isAnonymous) {
-            showStatus(
-                "Please open customer support in a separate browser session."
+            throw new Error(
+                "Customer authentication is using the wrong account."
             );
-            sendButton.disabled = true;
-            return;
         }
 
         if (!user) {
-            const credential = await signInAnonymously(auth);
+            const credential = await signInAnonymously(customerAuth);
             user = credential.user;
         }
 
@@ -328,16 +326,16 @@ async function sendMessage() {
         }
 
     } catch (error) {
-    console.error("Send message error:", error);
+        console.error("Send message error:", error);
 
-    showStatus(
-        "ERROR: " +
-        (error.code || "unknown") +
-        " - " +
-        (error.message || "No error details available")
-    );
+        showStatus(
+            "ERROR: " +
+            (error.code || "unknown") +
+            " - " +
+            (error.message || "No error details available")
+        );
 
-} finally {
+    } finally {
         isSending = false;
         sendButton.disabled = false;
         messageInput.focus();
